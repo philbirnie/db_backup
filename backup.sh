@@ -11,22 +11,22 @@
 YYYY=$(date +%Y)
 MM=$(date +%m)
 DD=$(date +%d)
-SITENAME="sitename"
-DB_USER="db_user"
-DB_PASSWORD="db_password"
+SITENAME="site"
+DB_USER="user"
+DB_PASSWORD="password"
 DB_DATABASE="database"
 
 # Get MySQL Dump
-mysqldump -u ${DB_USER} -p${DB_USER} ${DATABASE} > ./backups/prod.sql
+mysqldump -u ${DB_USER} -p${DB_PASSWORD} ${DB_DATABASE} > ./backups/prod.sql
 
 printf "Database Exported\n"
 
-tar -cvf ./backups/bosca_$YYYY$MM$DD.tar ./backups/prod.sql
+tar -cvf ./backups/${SITENAME}_$YYYY$MM$DD.tar ./backups/prod.sql
 
-printf "$SITENAME_$YYYY$MM$DD.tar Creation Complete!\n"
+printf "${SITENAME}_$YYYY$MM$DD.tar Creation Complete!\n"
 
 #GZIP file. 
-gzip ./backups/bosca_$YYYY$MM$DD.tar
+gzip -f ./backups/${SITENAME}_$YYYY$MM$DD.tar
 
 printf "Gzip Complete!\n"
 
